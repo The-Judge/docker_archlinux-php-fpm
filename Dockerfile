@@ -27,7 +27,7 @@ RUN chmod +x /tmp/remove_orphaned_packages.sh \
   && rm -f /tmp/remove_orphaned_packages.sh
 
 # Clear pacman caches
-RUN pacman -Scc
+RUN yes | pacman -Scc
 
 # Optimize pacman database
 RUN pacman-optimize
