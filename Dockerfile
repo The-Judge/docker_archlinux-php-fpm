@@ -17,7 +17,7 @@ RUN curl -Ls "https://aur.archlinux.org/packages/ph/php-xhprof/php-xhprof.tar.gz
   && su -c "makepkg -m" -s /bin/bash nobody \
   && yes | pacman -U php-xhprof-*.pkg.tar.xz
 RUN echo "" > /tmp/input && echo "Y" >> /tmp/input \
-  && pacman -S graphviz < /tmp/input
+  && pacman -S graphviz < /tmp/input \
   && rm -f /tmp/input
 
 # Remove orphaned packages
