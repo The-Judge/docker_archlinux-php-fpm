@@ -1,2 +1,4 @@
 #!/bin/bash
-[[ $(pacman -Qtdq) ]] && yes | pacman -Rns $(pacman -Qtdq)
+if [ ! -z "$(pacman -Qtdq)" ]; then
+  yes | pacman -Rns $(pacman -Qtdq)
+fi
