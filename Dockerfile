@@ -5,14 +5,14 @@ MAINTAINER Marc Richter <mail@marc-richter.info>
 RUN pacman -Syy \
   && pacman-db-upgrade
 
+# Install additional packages
+RUN yes | pacman -S git php php-apcu php-fpm php-gd php-mcrypt php-pear php-xhprof postfix
+
 # Remove orphaned packages
 ADD helpers/remove_orphaned_packages.sh /tmp/
 RUN chmod +x /tmp/remove_orphaned_packages.sh \
   && /tmp/remove_orphaned_packages.sh \
   && rm -f /tmp/remove_orphaned_packages.sh
-
-# Install additional packages
-RUN yes | pacman -S git php php-apcu php-fpm php-gd php-mcrypt php-pear php-xhprof postfix
 
 # Clear pacman caches
 RUN pacman -Scc
