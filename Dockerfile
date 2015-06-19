@@ -8,7 +8,7 @@ RUN pacman -Syy \
 # Install additional packages
 RUN yes | pacman -S git php php-apcu php-fpm php-gd php-mcrypt php-pear postfix wget
 RUN echo "" > /tmp/input && echo "Y" >> /tmp/input \
-  && pacman -S base-devel < /tmp/input
+  && pacman -S base-devel < /tmp/input \
   && rm -f /tmp/input
 RUN curl -Ls "https://aur.archlinux.org/packages/ph/php-xhprof/php-xhprof.tar.gz" \
   | tar -xz --directory /usr/src \
