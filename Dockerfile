@@ -37,7 +37,7 @@ RUN pacman-optimize
 
 # Modify php.ini
 # Remove open_basedir
-sed -i'' 's#^(open_basedir)#;\1#g' /etc/php/php.ini
+sed -i'' 's#^\(open_basedir.*$\)#;\1#g' /etc/php/php.ini
 
 ADD helpers/init /
 RUN chmod +x /init
