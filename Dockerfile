@@ -17,7 +17,9 @@ RUN curl -Ls "https://aur.archlinux.org/packages/ph/php-xhprof/php-xhprof.tar.gz
   && chown nobody -R /usr/src/php-xhprof \
   && cd /usr/src/php-xhprof \
   && su -c "makepkg -m" -s /bin/bash nobody \
-  && yes | pacman -U php-xhprof-*.pkg.tar.xz
+  && yes | pacman -U php-xhprof-*.pkg.tar.xz \
+  && cd \
+  && rm -rf /usr/src/php-xhprof
 # graphviz
 RUN echo "" > /tmp/input && echo "Y" >> /tmp/input \
   && pacman -S graphviz < /tmp/input \
