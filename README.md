@@ -19,3 +19,9 @@ the following additional packages are included:
     * pear
     * xhprof
 * Postfix
+
+# How to set individual PHP settings? #
+
+You can override the defaults in /etc/php/php.ini by starting your container with ``-v YOUR_HOSTDIR:/etc/php_custom``
+and save one or more files ending on ``.ini`` to that directory. On startup, a symlink will be created for every such
+file in ``/etc/php/conf.d`` and used by PHP-FPM.
