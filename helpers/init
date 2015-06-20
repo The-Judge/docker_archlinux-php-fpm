@@ -2,9 +2,11 @@
 
 # Create symlinks to *.ini files in folder /etc/php_custom for custom php.ini settings
 if [ -e /etc/php_custom ]; then
-  for file in /etc/php_custom/*.ini ; do
-    ln -sf ${file} /etc/php/conf.d/99_$(basename ${file})
-  done
+  if [ ! -z "$(find /etc/php_custom -name '*.ini')" ]; then
+    for file in /etc/php_custom/*.ini ; do
+      ln -sf ${file} /etc/php/conf.d/99_$(basename ${file})
+    done
+  fi
 fi
 
 # Start PHP-FPM
