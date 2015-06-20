@@ -7,15 +7,18 @@ RUN pacman -Syy \
 
 # Install additional packages
 RUN yes | pacman -S git php php-apcu php-fpm php-gd php-mcrypt php-pear postfix wget
+# base-devel
 RUN echo "" > /tmp/input && echo "Y" >> /tmp/input \
   && pacman -S base-devel < /tmp/input \
   && rm -f /tmp/input
+# php-xhprof
 RUN curl -Ls "https://aur.archlinux.org/packages/ph/php-xhprof/php-xhprof.tar.gz" \
   | tar -xz --directory /usr/src \
   && chown nobody -R /usr/src/php-xhprof \
   && cd /usr/src/php-xhprof \
   && su -c "makepkg -m" -s /bin/bash nobody \
   && yes | pacman -U php-xhprof-*.pkg.tar.xz
+# graphviz
 RUN echo "" > /tmp/input && echo "Y" >> /tmp/input \
   && pacman -S graphviz < /tmp/input \
   && rm -f /tmp/input
