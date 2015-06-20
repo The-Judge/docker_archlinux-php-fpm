@@ -41,6 +41,9 @@ RUN pacman-optimize
 # Remove open_basedir
 RUN sed -i'' 's#^\(open_basedir.*$\)#;\1#g' /etc/php/php.ini
 
+# Use TCP socket for php-fpm instead of file socket
+RUN sed -i'' 's#^listen =.*#listen = 9000#g' /etc/php/php-fpm.conf
+
 ADD helpers/init /
 RUN chmod +x /init
 
