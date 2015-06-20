@@ -44,4 +44,6 @@ RUN sed -i'' 's#^\(open_basedir.*$\)#;\1#g' /etc/php/php.ini
 ADD helpers/init /
 RUN chmod +x /init
 
+EXPOSE 9000
+
 CMD ["/init"]
