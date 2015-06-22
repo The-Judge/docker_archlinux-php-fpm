@@ -34,6 +34,12 @@ RUN chmod +x /tmp/remove_orphaned_packages.sh \
 # Clear pacman caches
 RUN yes | pacman -Scc
 
+# Fix for missing GPG keys
+RUN rm -R /etc/pacman.d/gnupg \
+  && pacman-key --init \
+  && pacman -Syy \
+  && pacman-key --populate archlinux
+
 # Optimize pacman database
 RUN pacman-optimize
 
