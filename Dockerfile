@@ -25,23 +25,23 @@ RUN echo "" > /tmp/input && echo "Y" >> /tmp/input \
   && pacman -S graphviz < /tmp/input \
   && rm -f /tmp/input
 
-# Remove orphaned packages
-ADD helpers/remove_orphaned_packages.sh /tmp/
-RUN chmod +x /tmp/remove_orphaned_packages.sh \
-  && /tmp/remove_orphaned_packages.sh \
-  && rm -f /tmp/remove_orphaned_packages.sh
+## Remove orphaned packages
+#ADD helpers/remove_orphaned_packages.sh /tmp/
+#RUN chmod +x /tmp/remove_orphaned_packages.sh \
+#  && /tmp/remove_orphaned_packages.sh \
+#  && rm -f /tmp/remove_orphaned_packages.sh
 
 # Clear pacman caches
 RUN yes | pacman -Scc
 
-# Fix for missing GPG keys
-RUN rm -R /etc/pacman.d/gnupg \
-  && pacman-key --init \
-  && pacman -Syy \
-  && pacman-key --populate archlinux
+## Fix for missing GPG keys
+#RUN rm -R /etc/pacman.d/gnupg \
+#  && pacman-key --init \
+#  && pacman -Syy \
+#  && pacman-key --populate archlinux
 
-# Optimize pacman database
-RUN pacman-optimize
+## Optimize pacman database
+#RUN pacman-optimize
 
 # Modify php.ini
 # Remove open_basedir
