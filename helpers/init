@@ -10,4 +10,4 @@ if [ -e /etc/php_custom ]; then
 fi
 
 # Start PHP-FPM
-[[ /usr/sbin/php-fpm -t ]] && /usr/sbin/php-fpm -F -R
+/usr/sbin/php-fpm -t && /usr/sbin/php-fpm -F -R
