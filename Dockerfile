@@ -49,6 +49,8 @@ RUN sed -i'' 's#^\(open_basedir.*$\)#;\1#g' /etc/php/php.ini
 
 # Use TCP socket for php-fpm instead of file socket
 RUN sed -i'' 's#^listen =.*#listen = 9000#g' /etc/php/php-fpm.conf
+# Include /etc/php/fpm.d/*.conf for php-fpm
+RUN sed -i'' 's#^;\(include=\/etc\/php\/fpm\.d\/\*\.conf.*$\)#\1#g' /etc/php/php-fpm.conf
 
 ADD helpers/init /
 RUN chmod +x /init
