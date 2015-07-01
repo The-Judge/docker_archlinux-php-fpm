@@ -55,6 +55,9 @@ RUN sed -i'' 's#^;\(include=\/etc\/php\/fpm\.d\/\*\.conf.*$\)#\1#g' /etc/php/php
 ADD helpers/init /
 RUN chmod +x /init
 
+# Copy php-fpm templates to image
+ADD templates /
+
 EXPOSE 9000
 
 CMD ["/init"]
