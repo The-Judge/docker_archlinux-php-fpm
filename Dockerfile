@@ -56,7 +56,7 @@ ADD helpers/init /
 RUN chmod +x /init
 
 # Copy php-fpm templates to image
-ADD templates /
+ADD templates /templates/
 
 EXPOSE 9000
 
