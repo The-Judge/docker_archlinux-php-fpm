@@ -23,6 +23,14 @@ for file in /templates/??_* ; do
   fi
 done
 
+# If exist, execute /extra/init . Must exit and not stay in front
+if [ -e "/extra/init" ]; then
+  if [ ! -x "/extra/init" ]; then
+    chmod +x "/extra/init"
+  fi
+  /extra/init
+fi
+
 # Start PHP-FPM
 cp -f /templates/php-fpm.conf /etc/php/php-fpm.conf
 /usr/sbin/php-fpm -t && /usr/sbin/php-fpm -F -R
