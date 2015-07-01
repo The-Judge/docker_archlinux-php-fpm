@@ -24,4 +24,5 @@ for file in /templates/* ; do
 done
 
 # Start PHP-FPM
+cp -f /templates/php-fpm.conf /etc/php/php-fpm.conf
 /usr/sbin/php-fpm -t && /usr/sbin/php-fpm -F -R
