@@ -17,7 +17,7 @@ fi
 chmod 777 "${LOGDIR}"
 
 # Add template files to /etc/php/fpm.d/ if not already existing
-for file in /templates/* ; do
+for file in /templates/??_* ; do
   if [ ! -e /etc/php/fpm.d/$(basename ${file}) ]; then
     cp -f "${file}" /etc/php/fpm.d/$(basename ${file})
   fi
