@@ -7,7 +7,7 @@ RUN pacman -Syy \
 
 # Install additional packages
 RUN yes | pacman -S git php php-apcu php-fpm php-gd php-mcrypt php-pear postfix wget
-# base-devel
+# base-devel - Ugly workarround needed due to selection dialogue
 RUN echo "" > /tmp/input && echo "Y" >> /tmp/input \
   && pacman -S base-devel < /tmp/input \
   && rm -f /tmp/input
@@ -40,8 +40,8 @@ RUN yes | pacman -Scc
 #  && pacman -Syy \
 #  && pacman-key --populate archlinux
 
-## Optimize pacman database
-#RUN pacman-optimize
+# Optimize pacman database
+RUN pacman-optimize
 
 # Modify php.ini
 # Remove open_basedir
