@@ -6,7 +6,7 @@ RUN pacman -Syy \
   && pacman-db-upgrade
 
 # Install additional packages
-RUN yes | pacman -S git php php-apcu php-fpm php-gd php-mcrypt php-pear postfix wget
+RUN yes | pacman -S git openssh php php-apcu php-fpm php-gd php-mcrypt php-pear postfix wget
 # base-devel - Ugly workarround needed due to selection dialogue
 RUN echo "" > /tmp/input && echo "Y" >> /tmp/input \
   && pacman -S base-devel < /tmp/input \
