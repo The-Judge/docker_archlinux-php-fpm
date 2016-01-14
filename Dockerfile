@@ -12,10 +12,8 @@ RUN echo "" > /tmp/input && echo "Y" >> /tmp/input \
   && pacman -S base-devel < /tmp/input \
   && rm -f /tmp/input
 # php-xhprof
-#RUN curl -Ls "https://pecl.php.net/get/xhprof-0.9.4.tgz" \
-#  | tar -xz --directory /usr/src \
-#  && chown nobody -R /usr/src/xhprof-0.9.4 \
 RUN git clone https://aur.archlinux.org/php-xhprof.git /usr/src/php-xhprof \
+  && chown nobody -R /usr/src/php-xhprof \
   && cd /usr/src/php-xhprof \
   && su -c "makepkg -m" -s /bin/bash nobody \
   && yes | pacman -U php-xhprof-*.pkg.tar.xz \
