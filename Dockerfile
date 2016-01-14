@@ -6,7 +6,7 @@ RUN pacman -Syy \
   && pacman-db-upgrade
 
 # Install additional packages
-RUN yes | pacman -S git php php-apcu php-fpm php-gd php-mcrypt postfix wget
+RUN yes | pacman -S git openssh php php-apcu php-fpm php-gd php-mcrypt postfix wget
 # base-devel
 RUN echo "" > /tmp/input && echo "Y" >> /tmp/input \
   && pacman -S base-devel < /tmp/input \
@@ -40,8 +40,8 @@ RUN yes | pacman -Scc
 #  && pacman -Syy \
 #  && pacman-key --populate archlinux
 
-## Optimize pacman database
-#RUN pacman-optimize
+# Optimize pacman database
+RUN pacman-optimize
 
 # Modify php.ini
 # Remove open_basedir
@@ -49,9 +49,14 @@ RUN sed -i'' 's#^\(open_basedir.*$\)#;\1#g' /etc/php/php.ini
 
 # Use TCP socket for php-fpm instead of file socket
 RUN sed -i'' 's#^listen =.*#listen = 9000#g' /etc/php/php-fpm.conf
+# Include /etc/php/fpm.d/*.conf for php-fpm
+RUN sed -i'' 's#^;\(include=\/etc\/php\/fpm\.d\/\*\.conf.*$\)#\1#g' /etc/php/php-fpm.conf
 
 ADD helpers/init /
 RUN chmod +x /init
+
+# Copy php-fpm templates to image
+ADD templates /templates/
 
 EXPOSE 9000
 

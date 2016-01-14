@@ -9,5 +9,28 @@ if [ -e /etc/php_custom ]; then
   fi
 fi
 
+# Create logdir if not existing
+LOGDIR="/var/log/php-fpm"
+if [ ! -e "${LOGDIR}" ]; then
+  mkdir -p "${LOGDIR}"
+fi
+chmod 777 "${LOGDIR}"
+
+# Add template files to /etc/php/fpm.d/ if not already existing
+for file in /templates/??_* ; do
+  if [ ! -e /etc/php/fpm.d/$(basename ${file}) ]; then
+    cp -f "${file}" /etc/php/fpm.d/$(basename ${file})
+  fi
+done
+
+# If exist, execute /extra/init . Must exit and not stay in front
+if [ -e "/extra/init" ]; then
+  if [ ! -x "/extra/init" ]; then
+    chmod +x "/extra/init"
+  fi
+  /extra/init
+fi
+
 # Start PHP-FPM
+cp -f /templates/php-fpm.conf /etc/php/php-fpm.conf
 /usr/sbin/php-fpm -t && /usr/sbin/php-fpm -F -R
