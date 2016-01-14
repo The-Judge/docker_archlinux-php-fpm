@@ -12,14 +12,14 @@ RUN echo "" > /tmp/input && echo "Y" >> /tmp/input \
   && pacman -S base-devel < /tmp/input \
   && rm -f /tmp/input
 # php-xhprof
-RUN curl -Ls "http://pecl.php.net/get/xhprof" \
+RUN curl -Ls "https://pecl.php.net/get/xhprof-0.9.4.tgz" \
   | tar -xz --directory /usr/src \
-  && chown nobody -R /usr/src/php-xhprof \
-  && cd /usr/src/php-xhprof \
+  && chown nobody -R /usr/src/xhprof-0.9.4 \
+  && cd /usr/src/xhprof-0.9.4 \
   && su -c "makepkg -m" -s /bin/bash nobody \
   && yes | pacman -U php-xhprof-*.pkg.tar.xz \
   && cd \
-  && rm -rf /usr/src/php-xhprof
+  && rm -rf /usr/src/php-xhprof*
 # graphviz
 RUN echo "" > /tmp/input && echo "Y" >> /tmp/input \
   && pacman -S graphviz < /tmp/input \
