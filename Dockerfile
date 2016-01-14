@@ -12,7 +12,7 @@ RUN echo "" > /tmp/input && echo "Y" >> /tmp/input \
   && pacman -S base-devel < /tmp/input \
   && rm -f /tmp/input
 # php-xhprof
-RUN curl -Ls "https://aur.archlinux.org/packages/ph/php-xhprof/php-xhprof.tar.gz" \
+RUN curl -Ls "http://pecl.php.net/get/xhprof" \
   | tar -xz --directory /usr/src \
   && chown nobody -R /usr/src/php-xhprof \
   && cd /usr/src/php-xhprof \
