@@ -2,7 +2,7 @@ FROM derjudge/archlinux
 MAINTAINER Marc Richter <mail@marc-richter.info>
 
 # Update pacman database and fix possibly incorrect pacman db format after world upgrade
-RUN pacman -Suyy \
+RUN yes | pacman -Suyy \
   && pacman-db-upgrade
 
 # Install additional packages
