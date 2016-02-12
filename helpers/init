@@ -4,6 +4,9 @@
 if [ -e /etc/php_custom ]; then
   if [ ! -z "$(find /etc/php_custom -name '*.ini')" ]; then
     for file in /etc/php_custom/*.ini ; do
+      if [ -e /etc/php/conf.d/$(basename ${file}) ]; then
+        rm -f /etc/php/conf.d/$(basename ${file})
+      fi
       ln -sf ${file} /etc/php/conf.d/99_$(basename ${file})
     done
   fi
